@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test:live": "nodemon --exec \"set NODE_ENV=test&& mocha --recursive\"",
     "start:live": "nodemon src/index.js"
   },
   "keywords": [],
