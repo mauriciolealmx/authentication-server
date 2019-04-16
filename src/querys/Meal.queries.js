@@ -1,9 +1,9 @@
 const Meal = require('../models/Meal');
 
-export const getMeal = _id => {
+exports.getMeal = _id => {
   return Meal.findById(id);
 };
 
-export const getMeals = () => {
+exports.getMeals = () => {
   return Meal.find({});
 };
