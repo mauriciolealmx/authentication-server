@@ -10,7 +10,7 @@ const tokenForUser = ({ id, name, email }) => {
   return jwt.encode(data, 'config.secret');
 };
 
-exports.signin = (req, res, next) => {
+exports.signin = (req, res) => {
   // User has already had their email and password authenticated
   res.send({ token: tokenForUser(req.user) });
 };
