@@ -12,8 +12,8 @@ require('dotenv').config();
 const app = express();
 
 // DB Setup
-const MONGO_URI =
-  'mongodb+srv://emdbAdmin:emdbAdmin@email-marketing-kcs7f.mongodb.net/address-book?retryWrites=true';
+const MONGO_URI = process.env.MONGO_URI;
+
 mongoose.Promise = global.Promise;
 mongoose.connect(MONGO_URI, { useNewUrlParser: true });
 
