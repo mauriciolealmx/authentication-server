@@ -22,7 +22,7 @@ app.use(bodyParser.json({ type: '*/*' }));
 app.use(passport.initialize());
 require('./services/passport')(passport);
 
-require('./routes/authRoutes')(app);
+require('./routes')(app);
 
 // Server Setup
 const PORT = process.env.NODE_ENV || 3090;
