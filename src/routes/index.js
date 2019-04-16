@@ -1,5 +1,5 @@
 module.exports = (app) => {
-  require('./authRoutes')(app);
+  require('./auth.routes')(app);
   require('./uploadRoutes')(app);
   require('./meal.routes')(app);
 }
