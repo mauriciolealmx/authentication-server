@@ -6,6 +6,9 @@ const passport = require('passport');
 const cors = require('cors');
 const morgan = require('morgan');
 
+// Environment variables.
+require('dotenv').config();
+
 const app = express();
 
 // DB Setup
@@ -29,3 +32,5 @@ const PORT = process.env.NODE_ENV || 3090;
 app.listen(PORT, () => {
   console.log('Server listening on: ', PORT);
 });
+
+module.exports = app;
