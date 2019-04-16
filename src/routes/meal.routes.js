@@ -1,7 +1,9 @@
 const { requireAuth } = require('../middlewares/passport');
-const getMeal = require('./getMeal');
-const getMeals = require('./getMeals');
-const createMeal = require('./createMeal');
+const {
+  createMeal,
+  getMeal,
+  getMeals
+} = require('../controllers/meal.controllers');
 
 module.exports = app => {
   /**
