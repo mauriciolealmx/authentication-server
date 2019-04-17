@@ -5,12 +5,12 @@ const app = require('../../src');
 const User = require('../../src/models/user/user');
 
 describe('/auth controllers', () => {
-  describe('POST to /signup', () => {
+  describe('POST /signup', () => {
     it('Should create/signup a new user', async () => {
       const res = await request(app)
         .post('/signup')
         .send({
-          email: 'test@gmail.com',
+          email: 'test@auth.com',
           password: 'P@ssword',
           name: 'testUser'
         });
@@ -19,21 +19,21 @@ describe('/auth controllers', () => {
     });
   });
 
-  describe('POST to /signin', () => {
+  describe('POST /signin', () => {
     it('Should signin a user and return a token', async () => {
-      const testUser = {
+      const userData = {
         name: 'testUser',
-        email: 'test@test.com',
+        email: 'test@auth.com',
         password: 'P@ssword'
       };
 
-      await new User(testUser).save();
+      await new User(userData).save();
 
       const res = await request(app)
         .post('/signin')
         .send({
-          email: testUser.email,
-          password: testUser.password
+          email: userData.email,
+          password: userData.password
         });
       assert('token' in res.body);
       assert(typeof res.body.token === 'string');
