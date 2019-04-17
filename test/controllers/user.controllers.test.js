@@ -6,7 +6,7 @@ const User = require('../../src/models/user/user');
 
 describe('User controllers', () => {
   // PUT to /users/:id
-  it.only('Should update a property of an existing user', async () => {
+  it('Should update a property of an existing user', async () => {
     const user = new User({
       email: 'testUpdate@gmail.com',
       password: 'P@ssword',
