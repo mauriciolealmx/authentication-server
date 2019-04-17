@@ -8,7 +8,7 @@ const Meal = mongoose.model('meal');
 
 describe('/meal controllers', () => {
   describe('GET /meals', () => {
-    it.only('Should get a list of meals', async () => {
+    it('Should get a list of meals', async () => {
       // TODO: Should generate a token without the signin process.
       const userData = {
         name: 'test',
