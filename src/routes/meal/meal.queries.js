@@ -1,4 +1,4 @@
-const Meal = require('../models/Meal');
+const Meal = require('../../models/meal/Meal');
 
 exports.getMeal = id => {
   return Meal.findById(id);

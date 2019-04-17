@@ -1,4 +1,4 @@
-const { createMeal, getMeal, getMeals } = require('../querys/Meal.queries');
+const { createMeal, getMeal, getMeals } = require('./meal.queries');
 
 exports.getMeal = async (req, res) => {
   const { id } = req.params;
@@ -18,10 +18,13 @@ exports.getMeals = async (req, res) => {
   }
 };
 
+/**
+ * @method POST
+ * @route "/meals"
+ */
 exports.createMeal = async (req, res) => {
   const { id } = req.user;
   const { title, description, imageUrl } = req.body;
-
   const mealToCreate = { user: id, title, description, imageUrl };
 
   const meal = await createMeal(mealToCreate);

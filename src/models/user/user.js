@@ -1,14 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
-// Define the model
-const { Schema } = mongoose;
-const userSchema = new Schema({
-  name: { type: String, required: true, lowercase: true },
-  email: { type: String, required: true, unique: true, lowercase: true },
-  password: { type: String, required: true },
-  date: { type: Date, default: Date.now }
-});
+const userSchema = require('./user.schema');
 
 // On Save Hook, encrypt password
 userSchema.pre('save', function(next) {
@@ -34,8 +27,5 @@ userSchema.methods.comparePassword = function(candidatePassword, callback) {
   });
 };
 
-// Create the model class
-const ModelClass = mongoose.model('user', userSchema);
-
-// Export the model
-module.exports = ModelClass;
+// Create and export the model class
+module.exports = mongoose.model('user', userSchema);
