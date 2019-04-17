@@ -1,6 +1,19 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+const PointSchema = new Schema({
+  type: {
+    type: String,
+    default: 'Point',
+    required: true
+  },
+  
+  coordinates: {
+    type: [Number],
+    required: true
+  }
+});
+
 // Define the schema.
 const userSchema = new Schema({
   name: {
@@ -24,7 +37,9 @@ const userSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+
+  geometry: { type: PointSchema, index: '2dsphere' }
 
   // Maybe:
   // cookin: { type: Boolean, default: false }
