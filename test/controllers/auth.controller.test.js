@@ -2,8 +2,9 @@ const assert = require('assert');
 const request = require('supertest');
 
 const app = require('../../src');
+const User = require('../../src/models/user/user');
 
-describe('Auth controllers', () => {
+describe('/auth controllers', () => {
   describe('POST to /signup', () => {
     it('Should create/signup a new user', async () => {
       const res = await request(app)
@@ -20,14 +21,22 @@ describe('Auth controllers', () => {
 
   describe('POST to /signin', () => {
     it('Should signin a user and return a token', async () => {
+      const testUser = {
+        name: 'testUser',
+        email: 'test@test.com',
+        password: 'P@ssword'
+      };
+
+      await new User(testUser).save();
+
       const res = await request(app)
         .post('/signin')
         .send({
-          email: 'test@gmail.com',
-          password: 'P@ssword'
+          email: testUser.email,
+          password: testUser.password
         });
-        
-      console.log({ res: res.body });
+      assert('token' in res.body);
+      assert(typeof res.body.token === 'string');
     });
   });
 });
