@@ -1,4 +1,8 @@
 const { createMeal, getMeal, getMeals, editMeal } = require('./meal.queries');
+/**
+ * @method GET
+ * @route "/meals/:id"
+ */
 exports.getMeal = async (req, res) => {
   const { id } = req.params;
 
@@ -10,6 +14,10 @@ exports.getMeal = async (req, res) => {
   }
 };
 
+/**
+ * @method GET
+ * @route "/meals"
+ */
 exports.getMeals = async (req, res) => {
   const meals = await getMeals();
   if (meals) {
@@ -23,8 +31,16 @@ exports.getMeals = async (req, res) => {
  */
 exports.createMeal = async (req, res) => {
   const { id } = req.user;
-  const { title, description, imageUrl } = req.body;
-  const mealToCreate = { user: id, title, description, imageUrl };
+  const { title, description, imageUrl, location: coordinates } = req.body;
+  const mealToCreate = {
+    user: id,
+    title,
+    description,
+    imageUrl,
+    geometry: {
+      coordinates
+    }
+  };
 
   const meal = await createMeal(mealToCreate);
   if (meal) {
