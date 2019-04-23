@@ -7,7 +7,7 @@ const PointSchema = new Schema({
     default: 'Point',
     required: true
   },
-  
+
   coordinates: {
     type: [Number],
     required: true
@@ -37,6 +37,12 @@ const userSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+
+  image: {
+    large: String,
+    medium: String,
+    thumbnail: String
   },
 
   geometry: { type: PointSchema, index: '2dsphere' }
