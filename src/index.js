@@ -1,10 +1,10 @@
 // Main starting point of the application
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
-const passport = require('passport');
-const cors = require('cors');
 const morgan = require('morgan');
+const passport = require('passport');
 
 // Environment variables.
 require('dotenv').config();
