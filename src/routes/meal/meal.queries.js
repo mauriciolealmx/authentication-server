@@ -12,3 +12,8 @@ exports.createMeal = meal => {
   const newMeal = new Meal(meal);
   return newMeal.save();
 };
+
+exports.editMeal = async (_id, userProps) => {
+  await Meal.findByIdAndUpdate({ _id }, userProps);
+  return Meal.findById(_id);
+};
