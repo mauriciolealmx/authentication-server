@@ -5,6 +5,7 @@ const User = require('../models/user/user');
 // const config = require('../config');
 
 // 'local' Strategy for login.
+exports.LOCAL = 'local';
 const localOptions = { usernameField: 'email' };
 const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
   User.findOne({ email }, (err, user) => {
@@ -21,6 +22,7 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
 });
 
 // 'jwt' Strategy for protected content.
+exports.JWT = 'jwt';
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: 'config.secret'
@@ -40,7 +42,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
 });
 
 // Use strategies.
-module.exports = function(passport) {
+exports.init = function(passport) {
   passport.use(jwtLogin);
   passport.use(localLogin);
 };
