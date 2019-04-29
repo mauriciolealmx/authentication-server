@@ -6,7 +6,7 @@ const User = require('../../src/models/user/user');
 
 describe('User controllers', () => {
   describe('GET to /users', () => {
-    it.only('Should get users by location', async () => {
+    it('Should get users by location', async () => {
       const newUser = new User({
         name: 'dallas',
         email: 'dallas@test.com',
