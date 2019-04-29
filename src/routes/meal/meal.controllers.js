@@ -1,4 +1,24 @@
-const { createMeal, getMeal, getMeals, editMeal } = require('./meal.queries');
+const {
+  createMeal,
+  getMeal,
+  getMeals,
+  editMeal,
+  getMealsByUser,
+  deleteMeal
+} = require('./meal.queries');
+
+/**
+ * @method GET
+ * @route "/meals"
+ * @Qery [lng, lat, maxDistance]
+ */
+exports.getMeals = async ({ query }, res) => {
+  const meals = await getMeals(query);
+  if (meals) {
+    return res.status(200).json(meals);
+  }
+};
+
 /**
  * @method GET
  * @route "/meals/:id"
@@ -16,12 +36,18 @@ exports.getMeal = async (req, res) => {
 
 /**
  * @method GET
- * @route "/meals"
+ * @route "/meals/user/:id"
  */
-exports.getMeals = async (req, res) => {
-  const meals = await getMeals();
+exports.getMealsByUserId = async (req, res) => {
+  const { id } = req.params;
+
+  const meals = await getMealsByUser(id);
   if (meals) {
-    return res.status(200).json(meals);
+    return res.json(meals);
+  } else {
+    return res
+      .status(404)
+      .json({ error: `No meals found for user with ID ${id}` });
   }
 };
 
@@ -54,7 +80,16 @@ exports.createMeal = async (req, res) => {
  */
 exports.editMeal = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   await editMeal(id, req.body);
   res.status(200).json({ success: true });
+};
+
+/**
+ * @method DELETE
+ * @route "/meals/:id"
+ */
+exports.deleteMeal = async (req, res) => {
+  const { id } = req.params;
+  const removedMeal = await deleteMeal(id);
+  res.status(200).json(removedMeal);
 };

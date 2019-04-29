@@ -10,6 +10,7 @@ module.exports = app => {
   /**
    * @route   GET /meals
    * @desc    Get all MealPreps
+   * @params lng, lat, and maxDistance can be specified.
    * @access  Private
    */
   app.get('/meals', requireAuth, getMeals);
