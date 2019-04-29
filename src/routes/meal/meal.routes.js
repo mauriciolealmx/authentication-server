@@ -3,7 +3,9 @@ const {
   createMeal,
   getMeal,
   getMeals,
-  editMeal
+  editMeal,
+  getMealsByUserId,
+  deleteMeal
 } = require('./meal.controllers');
 
 module.exports = app => {
@@ -17,10 +19,17 @@ module.exports = app => {
 
   /**
    * @route   GET /meals/:id
-   * @desc    Get one MealPrep by id.
+   * @desc    Get one MealPrep by meal id.
    * @access  Private
    */
   app.get('/meals/:id', requireAuth, getMeal);
+
+  /**
+   * @route   GET /meals/user/:id
+   * @desc    Get all Meals by user id.
+   * @access  Private
+   */
+  app.get('/meals/user/:id', requireAuth, getMealsByUserId);
 
   /**
    * @route   POST /meals
@@ -35,4 +44,11 @@ module.exports = app => {
    * @access  Private
    */
   app.patch('/meals/:id', requireAuth, editMeal);
+
+  /**
+   * @route   DELETE /meals/:id
+   * @desc    Delete/Remove a MealPrep by id.
+   * @access  Private
+   */
+  app.delete('/meals/:id', requireAuth, deleteMeal);
 };

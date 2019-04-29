@@ -67,6 +67,9 @@ describe('/meal controllers', () => {
       assert(mealsRes.body.length === 3);
     });
   });
+
+  describe('GET /meals/user/:id', () => {
+    it('Should get a list of meals created by an specific user', async () => {
       const userData = {
         name: 'test',
         email: 'test@getmeals.com',
@@ -90,13 +93,46 @@ describe('/meal controllers', () => {
         });
 
       const JWT = signedinUserRes.body.token;
-
       const mealsRes = await request(app)
-        .get('/meals')
+        .get(`/meals/user/${newUser._id}`)
         .set('Authorization', JWT);
 
       assert(mealsRes.body.length > 0);
-      assert(mealsRes.body.some(meal => meal.title === mealData.title));
+    });
+  });
+
+  describe('DELETE /meals/:id', () => {
+    it('Should delete the specified meal from meals list', async () => {
+      const userData = {
+        name: 'test',
+        email: 'test@getmeals.com',
+        password: 'P@ssword'
+      };
+      const newUser = new User(userData);
+      await newUser.save();
+
+      const mealData = {
+        description: 'Meal description',
+        title: 'Meal title',
+        user: newUser._id
+      };
+      const newMeal = await new Meal(mealData).save();
+
+      const signedinUserRes = await request(app)
+        .post('/signin')
+        .send({
+          email: userData.email,
+          password: userData.password
+        });
+
+      const JWT = signedinUserRes.body.token;
+
+      const mealsRes = await request(app)
+        .delete(`/meals/${newMeal._id}`)
+        .set('Authorization', JWT);
+
+      // The id returned from a new Class is an Object.
+      assert(mealsRes.body._id === newMeal._id.toString());
     });
   });
 });

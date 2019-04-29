@@ -7,8 +7,9 @@ exports.getMeal = id => {
   return Meal.findById(id);
 };
 
-exports.getMeals = () => {
-  return Meal.find({});
+exports.getMealsByUser = id => {
+  return Meal.find({ user: id });
+};
 
 /**
  * @description Get all meals or sorted by distance
@@ -40,3 +41,5 @@ exports.editMeal = async (_id, userProps) => {
   await Meal.findByIdAndUpdate({ _id }, userProps);
   return Meal.findById(_id);
 };
+
+exports.deleteMeal = _id => Meal.findByIdAndDelete(_id);
