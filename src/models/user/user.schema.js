@@ -17,9 +17,8 @@ const PointSchema = new Schema({
 // Define the schema.
 const userSchema = new Schema({
   name: {
-    type: String,
-    required: true,
-    lowercase: true
+    first: { type: String, lowercase: true },
+    last: { type: String, lowercase: true },
   },
 
   email: {
