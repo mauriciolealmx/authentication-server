@@ -21,22 +21,22 @@ describe('/auth controllers', () => {
 
   describe('POST /signin', () => {
     it('Should signin a user and return a token', async () => {
-      const userData = {
+      const password = 'P@ssword';
+      const newUser = await new User({
+        password,
         name: 'testUser',
-        email: 'test@auth.com',
-        password: 'P@ssword'
-      };
-
-      await new User(userData).save();
+        email: 'test@auth.com'
+      }).save();
 
       const res = await request(app)
         .post('/signin')
         .send({
-          email: userData.email,
-          password: userData.password
+          password,
+          email: newUser.email
         });
+
+      assert(res.body.user._id === newUser._id.toString());
       assert('token' in res.body);
-      assert(typeof res.body.token === 'string');
     });
   });
 });
