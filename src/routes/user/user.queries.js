@@ -11,6 +11,8 @@ exports.getUserByLocation = async (lng, lat) =>
     }
   });
 
+exports.getUser = _id => User.findOne({ _id });
+
 exports.editUser = async (_id, userProps) => {
   await User.findByIdAndUpdate({ _id }, userProps);
   return User.findById(_id);

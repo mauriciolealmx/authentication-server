@@ -1,4 +1,4 @@
-const { index, edit, deleteUser } = require('./user.controllers');
+const { index, edit, deleteUser, getUser } = require('./user.controllers');
 
 module.exports = app => {
   /**
@@ -7,6 +7,8 @@ module.exports = app => {
    */
 
   app.get('/users', index)
+
+  app.get('/users/:id', getUser)
   
   app.put('/users/:id', edit);
 
