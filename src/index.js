@@ -23,7 +23,8 @@ app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
 
 app.use(passport.initialize());
-require('./services/passport')(passport);
+
+require('./services/passport').init(passport);
 
 require('./routes')(app);
 
