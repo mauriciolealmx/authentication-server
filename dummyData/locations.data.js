@@ -1,0 +1,12 @@
+// Diners
+exports.CHASE_MORGAN = [-96.83049, 33.08674];
+exports.IKEA = [-96.82127, 33.09388];
+exports.JCPENNY = [-96.83259, 33.08229];
+exports.MARRIOTT_AT_LEGACY = [-96.8222, 33.07451];
+exports.STONE_BRIAR_MALL = [-96.8283796, 33.1029542];
+exports.USAA = [-96.81759, 33.0791];
+
+// Cooks
+exports.DIANAS = [-96.79946, 33.10585];
+exports.LEGACY_WEST = [-96.8333675, 33.0875965];
+exports.THE_SHOPS_AT_LEGACY = [-96.8296356, 33.0768036];
