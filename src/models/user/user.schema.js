@@ -18,7 +18,7 @@ const PointSchema = new Schema({
 const userSchema = new Schema({
   name: {
     first: { type: String, lowercase: true },
-    last: { type: String, lowercase: true },
+    last: { type: String, lowercase: true }
   },
 
   email: {
@@ -44,10 +44,12 @@ const userSchema = new Schema({
     thumbnail: String
   },
 
-  geometry: { type: PointSchema, index: '2dsphere' }
+  geometry: { type: PointSchema, index: '2dsphere' },
 
   // Maybe:
   // cookin: { type: Boolean, default: false }
+
+  credits: { type: Number, default: 0 }
 });
 
 module.exports = userSchema;
