@@ -4,7 +4,7 @@ const MAX_DISTANCE = 2000;
 const MIN_DISTANCE = 0;
 
 exports.getMeal = id => {
-  return Meal.findById(id);
+  return Meal.findById(id).populate('user', ['name']);
 };
 
 exports.getMealsByUser = id => {
