@@ -10,7 +10,7 @@ const {
 /**
  * @method GET
  * @route "/meals"
- * @Qery [lng, lat, maxDistance]
+ * @Query [lng, lat, maxDistance]
  */
 exports.getMeals = async ({ query }, res) => {
   const meals = await getMeals(query);

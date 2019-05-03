@@ -6,4 +6,6 @@ module.exports = app => {
   require('./upload/upload.routes')(app);
 
   require('./user/user.router')(app);
+
+  require('./billing/billing.routes')(app);
 };
