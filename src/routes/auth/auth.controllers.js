@@ -6,13 +6,19 @@ const tokenForUser = ({ id, name, email }) => {
   const iat = new Date().getTime();
   const oneDay = 1000 * 60 * 60 * 24;
   const exp = iat + oneDay;
+  // TODO: We really need the complete user during sing in
+  // basically the only thing that we should store in the
+  // TOKEN is the user's id so we can fetch it from the
+  // front.
   const data = { email, exp, iat, id, name, sub: id };
   return jwt.encode(data, 'config.secret');
 };
 
+// I wanted to take out the user here. I need a user in redux from the beggining.
 exports.signin = (req, res) => {
   // User has already had their email and password authenticated
-  res.send({ token: tokenForUser(req.user) });
+  // TODO: We getting tons of things that we do not need; Like password.
+  res.send({ token: tokenForUser(req.user), user: req.user });
 };
 
 exports.signup = (req, res, next) => {
@@ -37,7 +43,7 @@ exports.signup = (req, res, next) => {
 
     // If a user with email does NOT exist, create and save user record
     const user = new User({
-      name,
+      name: { first: name, last: null },
       email,
       password
     });

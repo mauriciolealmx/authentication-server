@@ -12,10 +12,17 @@ require('dotenv').config();
 const app = express();
 
 // DB Setup
-const MONGO_URI = process.env.MONGO_URI;
+if (!['test'].includes(process.env.NODE_ENV)) {
+  const MONGO_URI = process.env.MONGO_URI;
 
-mongoose.Promise = global.Promise;
-mongoose.connect(MONGO_URI, { useNewUrlParser: true });
+  mongoose.Promise = global.Promise;
+  mongoose.connect(MONGO_URI, { useNewUrlParser: true });
+}
+
+let PORT = process.env.PORT || 3090;
+if (['test'].includes(process.env.NODE_ENV)) {
+  PORT = 5000;
+}
 
 // App Setup
 app.use(morgan('combined'));
@@ -29,7 +36,6 @@ require('./services/passport').init(passport);
 require('./routes')(app);
 
 // Server Setup
-const PORT = process.env.NODE_ENV || 3090;
 app.listen(PORT, () => {
   console.log('Server listening on: ', PORT);
 });

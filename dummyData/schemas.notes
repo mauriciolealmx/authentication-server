@@ -1,0 +1,22 @@
+User {
+  _id
+  name
+  email
+  password
+  geometry
+  date
+  ...
+}
+
+MealPrepItem/Post {
+  _id
+  user: ObjectId
+  title
+  description
+  date
+  rating: {
+    value: 5,
+    ratedBy: ObjectId
+  }
+  comments: NESTING. ONE-TO-ONE relationship
+}

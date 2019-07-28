@@ -59,6 +59,8 @@ describe('/meal controllers', () => {
         .post('/signin')
         .send({ email, password: 'P@ssword' });
 
+      console.log(signedinUserRes.body);
+
       const JWT = signedinUserRes.body.token;
       const mealsRes = await request(app)
         .get(`/meals?lng=${lng}&lat=${lat}&maxDistance=${5000}`)
