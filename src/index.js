@@ -16,7 +16,10 @@ if (!['test'].includes(process.env.NODE_ENV)) {
   const MONGO_URI = process.env.MONGO_URI;
 
   mongoose.Promise = global.Promise;
-  mongoose.connect(MONGO_URI, { useNewUrlParser: true });
+  mongoose.connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 }
 
 let PORT = process.env.PORT || 3090;
