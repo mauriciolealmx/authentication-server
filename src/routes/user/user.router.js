@@ -6,12 +6,11 @@ module.exports = app => {
    * that route exists in auth.routes.
    */
 
-  app.get('/users', index)
+  app.get('/users', index);
 
-  app.get('/users/:id', getUser)
+  app.get('/users/:id', getUser);
   
   app.put('/users/:id', edit);
 
   app.delete('/users/:id', deleteUser);
-
 };
